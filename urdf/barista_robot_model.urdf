@@ -1,28 +1,154 @@
-  <!-- Standoff rod 1 -->
-  <link name="standoff_1">
+<?xml version="1.0"?>
+<robot name="barista_robot">
+
+  <!-- ================= BASE LINK ================= -->
+  <link name="base_link">
     <visual>
-      <origin xyz="0.12 0.12 0.155" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.01" length="0.20"/>
+        <cylinder radius="0.178" length="0.155"/>
       </geometry>
     </visual>
 
     <collision>
       <geometry>
-        <cylinder radius="0.01" length="0.20"/>
+        <cylinder radius="0.178" length="0.155"/>
       </geometry>
     </collision>
 
     <inertial>
-      <mass value="0.2"/>
       <origin xyz="0 0 0"/>
-      <inertia ixx="0.001" iyy="0.001" izz="0.001"
-               ixy="0" ixz="0" iyz="0"/>
+      <mass value="8.0"/>
+      <inertia
+        ixx="0.20"
+        iyy="0.20"
+        izz="0.30"
+        ixy="0"
+        ixz="0"
+        iyz="0"/>
     </inertial>
+  </link>
+
+  <!-- ================= STANDOFF RODS ================= -->
+
+  <link name="standoff_1">
+    <visual>
+      <geometry>
+        <cylinder radius="0.01" length="0.20"/>
+      </geometry>
+    </visual>
   </link>
 
   <joint name="standoff_1_joint" type="fixed">
     <parent link="base_link"/>
     <child link="standoff_1"/>
-    <origin xyz="0.12 0.12 0.155" rpy="0 0 0"/>
+    <origin xyz="0.12 0.12 0.155"/>
   </joint>
+
+  <link name="standoff_2">
+    <visual>
+      <geometry>
+        <cylinder radius="0.01" length="0.20"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="standoff_2_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="standoff_2"/>
+    <origin xyz="-0.12 0.12 0.155"/>
+  </joint>
+
+  <link name="standoff_3">
+    <visual>
+      <geometry>
+        <cylinder radius="0.01" length="0.20"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="standoff_3_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="standoff_3"/>
+    <origin xyz="-0.12 -0.12 0.155"/>
+  </joint>
+
+  <link name="standoff_4">
+    <visual>
+      <geometry>
+        <cylinder radius="0.01" length="0.20"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="standoff_4_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="standoff_4"/>
+    <origin xyz="0.12 -0.12 0.155"/>
+  </joint>
+
+  <!-- ================= TOP PLATE ================= -->
+
+  <link name="top_plate">
+    <visual>
+      <geometry>
+        <cylinder radius="0.15" length="0.02"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="top_plate_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="top_plate"/>
+    <origin xyz="0 0 0.355"/>
+  </joint>
+
+  <!-- ================= DRIVE WHEELS ================= -->
+
+  <link name="left_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.0352" length="0.0206"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0 0.18 0.0352" rpy="0 1.5708 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="right_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.0352" length="0.0206"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0 -0.18 0.0352" rpy="0 1.5708 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- ================= CASTER WHEEL ================= -->
+
+  <link name="caster_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_wheel"/>
+    <origin xyz="-0.15 0 0.02"/>
+  </joint>
+
+</robot>
